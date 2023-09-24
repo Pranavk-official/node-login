@@ -21,6 +21,7 @@ app.use(express.urlencoded({extended: true}))
 // middleware to handle json
 app.use(express.json())
 
+// nocahe to stop client side caching
 app.use(nocache());
 
 // session
