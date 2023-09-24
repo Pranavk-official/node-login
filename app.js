@@ -1,6 +1,8 @@
 const express = require('express');
 const session = require('express-session');
 const { v4: uuidv4 } = require('uuid');
+const nocache = require("nocache");
+
 
 const app = express();
 const PORT = process.env.PORT || 4200;
@@ -18,6 +20,8 @@ app.use('/js',express.static(__dirname + 'public/js'))
 app.use(express.urlencoded({extended: true}))
 // middleware to handle json
 app.use(express.json())
+
+app.use(nocache());
 
 // session
 app.use(session({
