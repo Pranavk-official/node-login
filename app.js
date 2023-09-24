@@ -1,4 +1,6 @@
 const express = require('express');
+const session = require('express-session');
+const { v4: uuidv4 } = require('uuid');
 
 const app = express();
 const PORT = process.env.PORT || 4200;
@@ -11,6 +13,19 @@ app.use(express.static('public'))
 app.use('/css',express.static(__dirname + 'public/css'))
 app.use('/img',express.static(__dirname + 'public/img'))
 app.use('/js',express.static(__dirname + 'public/js'))
+
+// middleware to handle urlencoded data
+app.use(express.urlencoded({extended: true}))
+// middleware to handle json
+app.use(express.json())
+
+// session
+app.use(session({
+    secret: uuidv4(),
+    resave: false,
+    saveUninitialized: false,
+
+}))
 
 
 // Routes
